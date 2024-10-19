@@ -1,4 +1,15 @@
-<div>
-  <h1 class="font-bold text-4xl">Rooms#show</h1>
-  <p>Find me in app/views/rooms/show.html.erb</p>
+<div class="my-8">
+  <div class="text-2xl mb-8">
+    ユーザー名：<%= @room.recipient_for(current_user).name %>とのDMルーム
+  </div>
+  <% @messages.each do |message| %>
+    <div class="<%= message.own_message?(current_user) ? 'text-right' : 'text-left' %>">
+      <p class="mb-4">
+        <strong><%= message.user.name %></strong>
+        <span class="text-gray-500 text-sm"><%= message.created_at.to_fs %></span>
+        <p class="mt-2"><%= message.content %></p>
+      </p>
+    </div>
+  <% end %>
 </div>
+<%= link_to "リストに戻る", rooms_path, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
