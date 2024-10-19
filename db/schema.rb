@@ -22,9 +22,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_19_071240) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "name"
+    t.integer "creator_id", null: false
+    t.integer "recipient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id", "recipient_id"], name: "index_rooms_on_creator_id_and_recipient_id", unique: true
+    t.index ["creator_id"], name: "index_rooms_on_creator_id"
+    t.index ["recipient_id"], name: "index_rooms_on_recipient_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,4 +46,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_19_071240) do
 
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "rooms", "users", column: "creator_id"
+  add_foreign_key "rooms", "users", column: "recipient_id"
 end
