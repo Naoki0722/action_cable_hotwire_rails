@@ -11,3 +11,13 @@
 }
 
 */
+
+@layer utilities {
+  .error {
+    color: red;
+  }
+  .success,
+  .notice {
+    color: green;
+  }
+}

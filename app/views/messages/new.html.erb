@@ -1,6 +1,8 @@
 <h2 class="text-2xl">新規メッセージ入力</h2>
 
 <%= form_with(model: @message, url: room_messages_path, class: 'my-8') do |form| %>
+  <%= form.hidden_field :room_id, :value => @message.room_id %>
+  <%= form.hidden_field :user_id, :value => @message.user_id %>
   <div>
     <%= form.label :content, "送信内容" %>
     <%= form.text_area :content, rows: 5, class: "border rounded p-2 w-full" %>
