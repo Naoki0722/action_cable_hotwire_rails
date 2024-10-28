@@ -1,7 +1,7 @@
 <h2 class="text-2xl">DM一覧ページ</h2>
 <div class="my-8">
   <% @rooms.each do |room| %>
-    <div>
+    <div class="my-4">
       <%= link_to "ユーザー名：#{room.recipient_for(current_user).name}とのやりとり #{room.id}", room_path(room),
       class: 'hover:underline hover:text-blue-500' %>
     </div>
