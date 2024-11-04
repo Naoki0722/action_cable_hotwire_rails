@@ -1,0 +1,13 @@
+<h2 class="text-2xl">メッセージ編集画面</h2>
+
+<%= form_with(model: @message, url: room_message_path, class: 'my-8') do |form| %>
+  <%= form.hidden_field :room_id, :value => @message.room_id %>
+  <%= form.hidden_field :user_id, :value => @message.user_id %>
+  <div>
+    <%= form.label :content, "送信内容" %>
+    <%= form.text_area :content, rows: 5, class: "border rounded p-2 w-full" %>
+  </div>
+  <div>
+    <%= form.submit "編集する", class: "bg-blue-500 text-white py-2 px-4 rounded" %>
+  </div>
+<% end %>

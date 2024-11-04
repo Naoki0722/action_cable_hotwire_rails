@@ -10,7 +10,9 @@
       <p class="mb-1">
         <strong><%= message.user.name %></strong>
         <span class="text-gray-500 text-sm"><%= message.created_at.to_fs %></span>
-        <p class="mt-2"><%= message.content %></p>
+        <p class="my-2"><%= message.content %></p>
+        <%= link_to_if message.own_message?(current_user), '編集', edit_room_message_path(@room.id, message.id),
+          class: 'bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded' %>
       </p>
     </div>
   <% end %>
