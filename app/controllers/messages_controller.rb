@@ -25,7 +25,6 @@ class MessagesController < ApplicationController
   def update
     @message = Message.find(params[:id])
     if @message.update(save_params)
-      flash[:success] = "Message updated!"
       redirect_to room_path(@message.room)
     else
       render :edit, status: :unprocessable_entity
