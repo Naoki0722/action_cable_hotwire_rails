@@ -3,7 +3,10 @@
     <%= form.hidden_field :room_id, :value => @message.room_id %>
     <%= form.hidden_field :user_id, :value => @message.user_id %>
     <div class="flex items-start justify-end">
-      <%= form.text_area :content, class: "border rounded p-2 mr-4 w-3/5" %>
+      <div class="w-3/5 mr-4 ">
+        <%= form.text_area :content, class: "border rounded p-2 w-full" %>
+        <span class="text-red-500"><%= @message.errors.full_messages_for(:content).presence&.join(',') %></span>
+      </div>
       <%= form.submit "編集する", class: "bg-blue-500 text-white py-2 px-4 rounded" %>
     </div>
   <% end %>

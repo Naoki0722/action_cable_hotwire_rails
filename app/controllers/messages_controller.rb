@@ -28,9 +28,7 @@ class MessagesController < ApplicationController
       flash[:success] = "Message updated!"
       redirect_to room_path(@message.room)
     else
-      flash[:error] = @message.errors.full_messages.join(", ")
-      redirect_to edit_room_message_path(message.room, message)
-      # render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
