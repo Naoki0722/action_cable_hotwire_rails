@@ -7,13 +7,14 @@ class MessagesController < ApplicationController
   end
 
   def create
-    message = Message.new(save_params)
-    if message.save
+    @message = Message.new(save_params)
+    if @message.save
       flash[:success] = "Message sent!"
-      redirect_to room_path(message.room)
+      # redirect_to room_path(@message.room)
     else
-      flash[:error] = message.errors.full_messages.join(", ")
-      redirect_to new_room_message_path(message.room)
+      # flash[:error] = @message.errors.full_messages.join(", ")
+      # redirect_to new_room_message_path(@message.room)
+      render :new, status: :unprocessable_entity
     end
   end
 
