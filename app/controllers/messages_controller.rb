@@ -7,20 +7,34 @@ class MessagesController < ApplicationController
   end
 
   def create
-    p create_params[:user_id]
-    message = Message.new(create_params)
-    if message.save
+    @message = Message.new(save_params)
+    if @message.save
       flash[:success] = "Message sent!"
-      redirect_to room_path(message.room)
+      # redirect_to room_path(@message.room)
     else
-      flash[:error] = message.errors.full_messages.join(", ")
-      redirect_to new_room_message_path(message.room)
+      # flash[:error] = @message.errors.full_messages.join(", ")
+      # redirect_to new_room_message_path(@message.room)
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @room = Room.find(params[:room_id])
+    @message = Message.find(params[:id])
+  end
+
+  def update
+    @message = Message.find(params[:id])
+    if @message.update(save_params)
+      redirect_to room_path(@message.room)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
 
-  def create_params
+  def save_params
     params.require(:message).permit(:content, :room_id, :user_id)
   end
 end

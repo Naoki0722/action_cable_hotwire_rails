@@ -1,13 +1,15 @@
-<h2 class="text-2xl">新規メッセージ入力</h2>
-
-<%= form_with(model: @message, url: room_messages_path, class: 'my-8') do |form| %>
-  <%= form.hidden_field :room_id, :value => @message.room_id %>
-  <%= form.hidden_field :user_id, :value => @message.user_id %>
-  <div>
-    <%= form.label :content, "送信内容" %>
-    <%= form.text_area :content, rows: 5, class: "border rounded p-2 w-full" %>
-  </div>
-  <div>
-    <%= form.submit "送信する", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded" %>
-  </div>
+<%= turbo_frame_tag 'new_message' do %>
+  <%= form_with(model: @message, url: room_messages_path, class: 'my-8') do |form| %>
+    <%= form.hidden_field :room_id, :value => @message.room_id %>
+    <%= form.hidden_field :user_id, :value => @message.user_id %>
+    <div>
+      <%= form.label :content, "送信内容" %>
+      <%= form.text_area :content, rows: 5, class: "border rounded p-2 w-full" %>
+      <span class="text-red-500"><%= @message.errors.full_messages_for(:content).presence&.join(',') %></span>
+    </div>
+    <div>
+      <%= form.submit "送信する", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded" %>
+      <%= link_to 'キャンセル', room_path(@message.room_id), class: 'ml-2 border border-black py-2 px-4 rounded' %>
+    </div>
+  <% end %>
 <% end %>

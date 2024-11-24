@@ -1,0 +1,5 @@
+<%= turbo_stream.append "messages" do %>
+  <%= render partial: 'rooms/list' %>
+<% end %>
+
+<%= turbo_stream.update "new_message", '' %>
